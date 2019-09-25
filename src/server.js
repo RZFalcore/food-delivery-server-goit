@@ -8,12 +8,13 @@ const logger = morgan("combined");
 const startServer = port => {
   const server = http.createServer((request, response) => {
     const parsedURL = url.parse(request.url);
-    const funcRout = router[parsedURL.pathname];
+    const funcRout = router[parsedURL.pathname] || router.default;
 
     logger(request, response, () => {
       funcRout(request, response);
     });
   });
+
   server.listen(port, err => {
     if (err) {
       console.error(err);
