@@ -12,11 +12,11 @@ const productsDB = path.join(
 const products = (req, res) => {
   fs.readFile(productsDB, "utf8", (err, data) => {
     if (err) {
-      console.error(err);
+      return console.error(err);
     }
+    console.log("Read products DB");
 
     res.end(data);
-    console.log("Read products DB");
   });
 };
 
